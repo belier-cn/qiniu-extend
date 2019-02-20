@@ -14,6 +14,30 @@
         <module>bean-handler-qiniu</module>
     </modules>
 
+    <name>qiniu-extend</name>
+    <description>七牛扩展父工程</description>
+    <url>https://github.com/belier-cn/qiniu-extend</url>
+
+    <licenses>
+        <license>
+            <name>The MIT License (MIT)</name>
+            <url>https://github.com/belier-cn/qiniu-extend/blob/master/LICENSE</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>belier</name>
+            <email>belier@belier.cn</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git@github.com:belier-cn/qiniu-extend.git</connection>
+        <developerConnection>scm:git@github.com:belier-cn/qiniu-extend.git</developerConnection>
+        <url>git@github.com:belier-cn/qiniu-extend.git</url>
+    </scm>
+
     <properties>
         <source-plugin.version>3.0.1</source-plugin.version>
         <compiler-plugin.version>3.8.0</compiler-plugin.version>
