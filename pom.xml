@@ -56,6 +56,8 @@
         <reflectasm.version>1.11.7</reflectasm.version>
         <mybatis.version>3.4.6</mybatis.version>
         <reflections.version>0.9.11</reflections.version>
+        <commons-collections4.version>4.2</commons-collections4.version>
+        <slf4j.version>1.7.25</slf4j.version>
     </properties>
 
 
@@ -167,13 +169,13 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
-                <version>4.2</version>
+                <version>${commons-collections4.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.7.25</version>
+                <version>${slf4j.version}</version>
             </dependency>
 
         </dependencies>
