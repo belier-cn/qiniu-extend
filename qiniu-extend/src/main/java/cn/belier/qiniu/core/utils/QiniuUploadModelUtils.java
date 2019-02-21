@@ -8,7 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -34,7 +33,7 @@ public class QiniuUploadModelUtils {
 
         return QiniuUploadModel.builder()
                 .buckName(bucketName)
-                .inputStream(file.getInputStream())
+                .bytes(file.getBytes())
                 .contentType(file.getContentType()).build();
 
     }
@@ -60,12 +59,10 @@ public class QiniuUploadModelUtils {
 
         ImageIO.write(bufferedImage, formatName, outputStream);
 
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-
         return QiniuUploadModel.builder()
                 .buckName(bucketName)
                 .contentType(mediaType.toString())
-                .inputStream(inputStream)
+                .bytes(outputStream.toByteArray())
                 .build();
     }
 

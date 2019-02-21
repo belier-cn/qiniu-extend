@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.io.InputStream;
 import java.time.temporal.ChronoUnit;
 
 /**
@@ -36,9 +35,9 @@ public class QiniuUploadModel {
     private String name;
 
     /**
-     * 输入流
+     * 数据
      */
-    private InputStream inputStream;
+    private byte[] bytes;
 
     /**
      * 文件类型

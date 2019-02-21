@@ -11,9 +11,9 @@ import com.qiniu.util.Auth;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.util.StreamUtils;
 
 import javax.imageio.ImageIO;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
@@ -53,10 +53,10 @@ public class QiniuUpload {
         // 生成token
         String token = auth.uploadToken(uploadModel.getBuckName());
 
-        byte[] bytes = getBytes(uploadModel);
+        compress(uploadModel);
 
         // 上传图片
-        Response response = uploadManager.put(bytes, getKey(uploadModel, bytes), token
+        Response response = uploadManager.put(uploadModel.getBytes(), getKey(uploadModel), token
                 , null, uploadModel.getContentType(), false);
 
         // 解析响应
@@ -81,13 +81,12 @@ public class QiniuUpload {
     }
 
     /**
-     * 获取字节数字
+     * 压缩
      *
      * @param uploadModel {@link QiniuUploadModel}
-     * @return byte[]
      * @throws IOException IO异常
      */
-    private byte[] getBytes(QiniuUploadModel uploadModel) throws IOException {
+    private void compress(QiniuUploadModel uploadModel) throws IOException {
 
         // 压缩图片
         if (uploadModel.isCompress()) {
@@ -98,15 +97,16 @@ public class QiniuUpload {
 
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-                // 原始尺寸压缩
-                Thumbnails.of(uploadModel.getInputStream()).scale(1).toOutputStream(outputStream);
+                ByteArrayInputStream inputStream = new ByteArrayInputStream(uploadModel.getBytes());
 
-                return outputStream.toByteArray();
+                // 原始尺寸压缩
+                Thumbnails.of(inputStream).scale(1).toOutputStream(outputStream);
+
+                uploadModel.setBytes(outputStream.toByteArray());
             }
 
         }
 
-        return StreamUtils.copyToByteArray(uploadModel.getInputStream());
     }
 
     /**
@@ -115,7 +115,7 @@ public class QiniuUpload {
      * @param uploadModel {@link QiniuUpload}
      * @return key
      */
-    private String getKey(QiniuUploadModel uploadModel, byte[] bytes) {
+    private String getKey(QiniuUploadModel uploadModel) {
 
         if (StringUtils.isBlank(uploadModel.getPrefix())) {
 
@@ -128,7 +128,7 @@ public class QiniuUpload {
         } else {
 
             if (StringUtils.isBlank(uploadModel.getName())) {
-                return uploadModel.getPrefix() + DigestUtils.md5Hex(bytes);
+                return uploadModel.getPrefix() + DigestUtils.md5Hex(uploadModel.getBytes());
             } else {
                 return uploadModel.getPrefix() + uploadModel.getName();
             }

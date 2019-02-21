@@ -5,16 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.belier</groupId>
-    <artifactId>qiniu-extend</artifactId>
+    <artifactId>qiniu-extend-parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
     <modules>
-        <module>qiniu-core</module>
+        <module>qiniu-extend</module>
         <module>qiniu-spring-boot-starter</module>
         <module>bean-handler-qiniu</module>
     </modules>
 
-    <name>qiniu-extend</name>
+    <name>qiniu-extend-parent</name>
     <description>七牛扩展父工程</description>
     <url>https://github.com/belier-cn/qiniu-extend</url>
 
@@ -68,7 +68,7 @@
 
             <dependency>
                 <groupId>cn.belier</groupId>
-                <artifactId>qiniu-core</artifactId>
+                <artifactId>qiniu-extend</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
