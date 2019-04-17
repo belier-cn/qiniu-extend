@@ -1,8 +1,5 @@
 package cn.belier.qiniu.autoconfigure;
 
-import cn.belier.bean.handler.purl.reflect.PrivateUrlHandler;
-import cn.belier.bean.handler.purl.reflect.PrivateUrlOperation;
-import cn.belier.bean.handler.qiniu.QiniuPrivateUrlOperation;
 import cn.belier.qiniu.core.BucketInfoManager;
 import cn.belier.qiniu.core.QiniuUpload;
 import com.qiniu.cdn.CdnManager;
@@ -12,7 +9,6 @@ import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -79,13 +75,6 @@ public class QiniuAutoConfiguration {
     @ConditionalOnMissingBean
     public QiniuUpload qiniuUpload(Auth auth, BucketInfoManager bucketInfoManager, UploadManager uploadManager) {
         return new QiniuUpload(auth, bucketInfoManager, uploadManager);
-    }
-
-    @Bean
-    @ConditionalOnClass({PrivateUrlHandler.class, PrivateUrlOperation.class, QiniuPrivateUrlOperation.class})
-    @ConditionalOnMissingBean(QiniuPrivateUrlOperation.class)
-    public QiniuPrivateUrlOperation qiniuPrivateUrlOperation(Auth auth, BucketInfoManager bucketInfoManager) {
-        return new QiniuPrivateUrlOperation(bucketInfoManager, auth);
     }
 
 

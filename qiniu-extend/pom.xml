@@ -11,7 +11,6 @@
 
     <artifactId>qiniu-extend</artifactId>
 
-
     <dependencies>
 
         <dependency>
@@ -53,16 +52,6 @@
         <dependency>
             <groupId>org.apache.tika</groupId>
             <artifactId>tika-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.esotericsoftware</groupId>
-            <artifactId>reflectasm</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
         </dependency>
 
         <dependency>

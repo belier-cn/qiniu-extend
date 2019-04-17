@@ -35,23 +35,6 @@
             <optional>true</optional>
         </dependency>
 
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.belier</groupId>
-            <artifactId>bean-handler-qiniu</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.belier</groupId>
-            <artifactId>bean-handler</artifactId>
-            <optional>true</optional>
-        </dependency>
-
     </dependencies>
 
 </project>
