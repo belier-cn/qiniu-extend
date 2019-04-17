@@ -11,6 +11,8 @@ import com.qiniu.util.Auth;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.tika.mime.MimeTypeException;
+import org.apache.tika.mime.MimeTypes;
 
 import javax.imageio.ImageIO;
 import java.io.ByteArrayInputStream;
@@ -117,6 +119,34 @@ public class QiniuUpload {
      */
     private String getKey(QiniuUploadModel uploadModel) {
 
+        String extension = "";
+
+        try {
+            // 获取后缀
+            if (StringUtils.isNotBlank(uploadModel.getContentType())) {
+                extension = MimeTypes.getDefaultMimeTypes().forName(uploadModel.getContentType()).getExtension();
+            }
+        } catch (MimeTypeException e) {
+            // no handle
+        }
+
+        String key = getNotExtensionKey(uploadModel);
+
+        if (key != null) {
+            key += extension;
+        }
+
+        return key;
+
+    }
+
+    /**
+     * 获取没有后缀的key
+     *
+     * @param uploadModel {@link QiniuUpload}
+     * @return key
+     */
+    private String getNotExtensionKey(QiniuUploadModel uploadModel) {
         if (StringUtils.isBlank(uploadModel.getPrefix())) {
 
             if (StringUtils.isBlank(uploadModel.getName())) {
@@ -134,7 +164,6 @@ public class QiniuUpload {
             }
 
         }
-
     }
 
 
