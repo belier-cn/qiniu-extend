@@ -48,18 +48,27 @@ public class QiniuUploadModel {
     /**
      * 生成私有链接的有效时间 bucket 是私有空间才生效
      */
+    @Builder.Default
     private long expire = 3600L;
 
 
     /**
      * 生成私有链接的有效时间的单位
      */
+    @Builder.Default
     private ChronoUnit chronoUnit = ChronoUnit.SECONDS;
 
     /**
      * 是否压缩
      */
+    @Builder.Default
     private boolean compress = true;
 
+
+    /**
+     * 是否覆盖
+     */
+    @Builder.Default
+    private boolean cover = true;
 
 }

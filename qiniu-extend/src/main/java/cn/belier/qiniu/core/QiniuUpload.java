@@ -52,13 +52,15 @@ public class QiniuUpload {
         // 对应桶对象
         Bucket bucket = bucketInfoManager.getBucket(uploadModel.getBuckName());
 
+        String key = getKey(uploadModel);
+
         // 生成token
-        String token = auth.uploadToken(uploadModel.getBuckName());
+        String token = getToken(uploadModel, key);
 
         compress(uploadModel);
 
         // 上传图片
-        Response response = uploadManager.put(uploadModel.getBytes(), getKey(uploadModel), token
+        Response response = uploadManager.put(uploadModel.getBytes(), key, token
                 , null, uploadModel.getContentType(), false);
 
         // 解析响应
@@ -79,6 +81,23 @@ public class QiniuUpload {
         String versionUrl = url.contains("?") ? url + "&v=" + version : url + "?v=" + version;
 
         return result.setUrl(url).setVersionUrl(versionUrl).setBucket(bucket);
+
+    }
+
+    /**
+     * 获取上传token
+     *
+     * @param uploadModel {@link QiniuUploadModel}
+     * @param key         key
+     * @return token
+     */
+    private String getToken(QiniuUploadModel uploadModel, String key) {
+
+        if (uploadModel.isCover()) {
+            return auth.uploadToken(uploadModel.getBuckName(), key);
+        }
+
+        return auth.uploadToken(uploadModel.getBuckName());
 
     }
 
