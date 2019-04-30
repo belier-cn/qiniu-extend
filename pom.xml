@@ -7,7 +7,7 @@
     <groupId>cn.belier</groupId>
     <artifactId>qiniu-extend-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <modules>
         <module>qiniu-extend</module>
         <module>qiniu-spring-boot-starter</module>
