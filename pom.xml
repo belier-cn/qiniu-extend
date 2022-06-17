@@ -51,7 +51,7 @@
         <commons-lang3.version>3.9</commons-lang3.version>
         <qiniu.version>7.2.18</qiniu.version>
         <tika.version>1.20</tika.version>
-        <fastjson.version>1.2.57</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
         <commons-codec.version>1.12</commons-codec.version>
         <thumbnailator.version>0.4.8</thumbnailator.version>
